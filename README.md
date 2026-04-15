@@ -1,44 +1,38 @@
 # golem-agent-skills
 
-Shared golem skills packaged for Claude Code and Codex.
+Shared `{golem}` skills packaged for Claude Code and openAI codex/GPT 5.4.
 
-Canonical skill content lives in [`skills/`](./skills). Provider-specific plugin
-metadata lives under [`plugins/`](./plugins), with marketplaces at
-[`/.claude-plugin/marketplace.json`](./.claude-plugin/marketplace.json) and
-[`/.agents/plugins/marketplace.json`](./.agents/plugins/marketplace.json).
+Canonical skill content lives in [`skills/`](./skills).
+
+Made by [ThinkR](https://thinkr.fr/) for professional Shiny development.
 
 ## Claude Code installation
 
-Add the marketplace from GitHub:
+1. Add the marketplace from GitHub:
+    ```text
+    /plugin marketplace add ilyaZar/golem-agent-skills
+    ```
 
-```text
-/plugin marketplace add ilyaZar/golem-agent-skills
-```
+2. Confirm the marketplace is available:
+    ```text
+    /plugin marketplace list
+    ```
 
-Confirm the marketplace is available:
+3. Install the plugin:
+    ```text
+    /plugin install golem-skills@thinkr
+    ```
 
-```text
-/plugin marketplace list
-```
+4. Reload plugins if prompted:
+    ```text
+    /reload-plugins
+    ```
 
-Install the plugin:
-
-```text
-/plugin install golem-skills@thinkr
-```
-
-Reload plugins if prompted:
-
-```text
-/reload-plugins
-```
-
-After installation, the following plugin skills should be available:
-
-```text
-/golem-skills:golem-upgrade
-/golem-skills:golem-fix-missing-ns
-```
+5. After installation, the following plugin skills should be available:
+    ```text
+    /golem-skills:golem-upgrade
+    /golem-skills:golem-fix-missing-ns
+    ```
 
 ## Remove the plugin
 
@@ -48,14 +42,12 @@ After installation, the following plugin skills should be available:
 /reload-plugins
 ```
 
-## golem package helper
+## `{golem}` package helper
 
-The `golem::use_agent_skills()` helper can also install the same skill payloads
-into a golem project. It reads from the canonical upstream `skills/` tree and
-copies into provider-specific target directories in the consuming project:
+The `golem::use_agent_skills()` (starting with version `0.6.0`) helper can also
+install the same skill payloads into a `{golem}` project. It reads from the
+canonical upstream `skills/` tree and copies into provider-specific target
+directories in the consuming Shiny App project:
 
 - Claude target: `.claude/skills/`
 - Codex target: `.agents/skills/`
-
-This keeps the upstream repository canonical while preserving the expected
-project layout for each tool.
