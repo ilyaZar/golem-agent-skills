@@ -8,3 +8,5 @@ settings:
     main_file_name: AGENTS.md
 skills_available:
   - golem-upgrade
+  - golem-fix-missing-ns
+  - golem-fix-missing-ns
