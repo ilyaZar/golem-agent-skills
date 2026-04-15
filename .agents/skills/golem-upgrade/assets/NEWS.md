@@ -1,0 +1,260 @@
+> Notes: the # between parenthesis refers to the related issue on GitHub, and the @ refers to an external contributor solving this issue.
+
+# golem 0.5.1 to 0.6.0
+
+## New features / user-visible changes
+
+- The `add_dockerfile_with_renv_*` function now generates a multi-stage Dockerfile by default (use `single_file = FALSE` to retain the previous behavior).
+- The `add_dockerfile_with_renv_*` function now creates a Dockerfile that sets `golem.app.prod = TRUE` by default (use `set_golem.app.prod = FALSE` to retain the previous behavior).
+
+## Breaking change
+
+- The `get_current_config()` has been rework in two ways: (1) it now either check the `GOLEM_CONFIG_PATH` env var or the default path (inst/golem-config.yml). `{golem}` no longer tries to guess non standard paths, and does a hard fail if the file doesn't exist, (2) the function no longer copy the `config` files from the skeleton if ever the files are not there (@ilyaZar, @LDSamson, #1178)
+
+- `{golem}` functions used to rely on arguments that where either `wd`, `path`, `pkg` or `golem_wd`. This has now been standardized and all functions rely on `golem_wd` now (@ilyaZar, #845)
+
+- Creating a `golem` doesn't call `set_here()` nor `usethis::create_project()` anymore. It used to be because we wanted to be able to use `here::here()`, but the function should be able to find its way based using `DESCRIPTION`. It gives a lighter implementation of golem projects creation as it doesn't mess up with where `here()` is anymore.
+
+- The `add_*_files` and `use_*_files` now fail when:
+  - The directory where the user tries to add the file doesn't exist. `{golem}` used to try to create the directory but that's not the function job — use\_\*\_file functions should only be there to add file (Singe responsabily )
+  - The file that the user tries to create already exists
+
+- Creating a golem with `create_golem(overwrite = TRUE)` will now **delete the old folder** and replace with the golem skeleton.
+
+## User visible change
+
+- `run_dev()` only prints one message (#1191 / @howardbaik)
+
+## Bug fix
+
+- Removing the comments on golem creation didn't work fully, this has been fixed.
+
+- Renamed a function in 02_dev.R (add_any_file => add_empty_file)
+
+- The `create_if_needed()` function has been fixed to work in non interactive mode (#1154, @pachadotdev)
+
+## Internal changes
+
+- `{golem}` now embarks a `claude.md` file and a series of skills
+
+- Full refactoring of the `add_*_files` and `use_*_files` functions that now all share the same behavior
+
+- The internal `check_name_consistency()` now parses the code of `app_config.R` and get the `package` arg of `system.file`, instead of doing a text based search. This allows the function to detect several calls to `system.file` and fixes the bug from #1179
+
+## Doc
+
+- Vignettes have been renamed
+
+# golem 0.5.1
+
+- Hotfixing a bug with utils_download_file (#1168)
+
+# golem 0.5.0
+
+## New functions
+
+- `is_golem()` tries to guess if the current folder is a `{golem}`-based app (#836)
+
+- `use_readme_rmd()` adds a `{golem}` specific `README.Rmd` (@ilyaZar, #1011)
+
+- rename `add_rstudioconnect_file()` to `add_positconnect_file()` (@ilyaZar, #1017)
+
+- `add_empty_file` creates an empty file in the www directory (#837)
+
+- `add_r6()` adds an empty R6 file (@ilyaZar, #1009)
+
+- `golem::welcome_page()` now display a page on default scaffold app (#1126)
+
+- Defunct usethis functions has been removed from dev.R (@ilyaZar, #1125)
+
+## New features / user visible changes
+
+- sourcing `dev/01_start.R` leaves the file in a clean state with all files added to the initial commit (#1094, @ilyaZar)
+
+- allow for user supplied `run_dev`-files (#886, @ilyaZar)
+
+- `README` is re-styled and links to various external resources of the `golemverse` (#1064, @ilyaZar)
+
+- `a_start`-vignette has updated documentation (#1046, @ilyaZar)
+
+- `fill_desc()` automatically calls `set_options()`; see `dev/01_start.R` as well (#1040, @ilyaZar)
+
+- `fill_desc()` now uses a `person` vector (#1027, @jmeyer2482, @ColinFay and @ilyaZar)
+
+- `use_{internal,external}_XXX_file()` function family has improved error handling for non-interactive usage (#1062, @ilyaZar)
+
+- `add_fct()` now adds the skeleton for a function (#1004, @ilyaZar)
+
+- The module skeleton now stick to tidyverse style (#1019, @ni2scmn)
+
+- Better comments to `fill_desc()` in `01_start.R` (#1021, @ilyaZar)
+
+- `01_start.R` now has a call to `usethis::use_git_remote()` (#1015, @ilyaZar)
+
+- Tests for `R/golem_utils_server.R` and `R/golem_utils_ui.R` now have full code coverage (#1020, @ilyaZar)
+
+- When setting a new name, `{golem}` now browses tests & vignettes (#805, @ilyaZar)
+
+- Adding `writeManifest()` to `deploy.R` (#1063, @ilyaZar)
+
+- `use_git()` is now at the bottom of 01_dev.R ((#1094, @ilyaZar))
+
+- `golem::add_dockerfile_with_renv_*()` set "rstudio" as default USER in Dockerfile to avoid launching app as root
+
+- It is now easier to modify the renv.config.pak.enabled parameter in the Dockerfile generated by `golem::add_dockerfile_with_renv_*()` functions.
+
+- We create an `.rscignore` in the golem dir whenever creating the connect related file (#110, @ilyaZar)
+
+## Bug fixes
+
+- `use_{internal,external}_XXX_file()` function family works with default missing `name` argument (#1060, @ilyaZar)
+
+- `run_dev()` now install needed dependencies to source `dev/run_dev.R` if needed (#942, @ilyaZar, @vincentGuyader)
+
+- `use_readme_rmd()` does not pop up when argument `open=FALSE` is set (#1044, @ilyaZar)
+
+- Docker commands now take the `-it` flag so it can be killed with `^C` (#1002, @ivokwee)
+
+- `add_module()` now behaves correctly when trying to use `mod_mod_XXX` and no longer opens an interactive menu (#997, @ilyaZar)
+
+- `{attachment}` now has a minimum version requirement (#1104, @ilyaZar)
+
+- `{pkgload}` now has a minimum version requirement (#1106)
+
+- `create_golem()` can be now used with path = "." and package_name empty
+
+## Internal changes
+
+- Add tests for (under/un)-tested files and functions and improve code coverage of `{golem}` (#1043, #1050, #1059, #1066, #1075, @ilyaZar)
+
+- `guess_where_config()` now finds the user config-yaml by reading its new location from user changes in "R/app_config.R" (#887, @ilyaZar)
+
+- All functions that require to get a path now rely on `get_golem_wd()` (#1016, @ilyaZar)
+
+- The test suite has been refactored and is now silent and faster.
+
+# 0.4.1
+
+This is an intermediate release after CRAN feedback.
+
+# 0.4.0
+
+## New functions
+
+- Add `add_partial_html_template()` to create a partial html template, with only a div and a `{{ }}` (@nathansquan #858).
+
+## New features / user visible changes
+
+- Dev hard dependencies have been moved to soft dependencies. You can see the list with `golem:::dev_deps`. They can be installed via `golem::install_dev_deps()`.
+- Soft dependency check is now done via `rlang::check_installed()` (#835)
+- `golem::run_dev()` has been refactored to match the behavior of other functions, notably it now uses `golem::get_golem_wd()` to find the current working dir.
+- `{golem}` now depends on `{rlang}` version >= 1.0.0
+- Functions that print to the console are now quiet if `options("golem.quiet" = TRUE)`, #793
+- Small documentation update in dockerfile related functions (#939)
+- `fill_desc()` now allows to set the version (#877)
+- Setting the Environment variable `GOLEM_MAINTENANCE_ACTIVE` to `TRUE` activates the maintenance mode of your app
+- `golem::run_dev()` now save all open documents before sourcing the `dev/run_dev.R` file
+- When creating an app, you'll get a message if the dev deps are not all installed (#915)
+- `03_deploy` now contains an example of sending the app to PositConnect or Shinyapps.io (#923)
+
+## Bug fix
+
+- The message after htmlTemplate creation now suggests to add in the UI, not only in `app_ui.R` (#861)
+- The Deprecation message for `use_recommended_deps` no longer suggest to user `use_recommended_deps` (#900)
+- The setting of the config file has been unified so that we are sure to keep the `!expr` in `golem_set_wd()`, and the codebase has been simplified for this (#709).
+- The functions adding files can no longer take a `name` argument that has `length() > 1`. This used to cause some bugs (#781)
+- The typo in `install.packages()` in `02_dev.R` has been corrected (@asiripanich)
+- `add_dockerfile_with_renv()` now works well with uppercase in package name
+- improve `get_golem_options()` documentation
+
+## Internal changes
+
+- `add_dockerfile_with_renv` now works well with uppercase in package name
+
+# golem 0.3.5
+
+Update in the tests for CRAN (commented a test that made new version of testthat fail).
+
+# golem 0.3.4
+
+Update in the tests for CRAN (skip not installed + examples).
+
+# golem 0.3.3
+
+## New functions
+
+- `add_dockerfile_with_renv()`, `add_dockerfile_with_renv_heroku()` and `add_dockerfile_with_renv_shinyproxy()` build Dockerfiles that rely on `{renv}`
+
+### Soft deprecated
+
+- `add_dockerfile`, `add_dockerfile_shinyproxy()` and `add_dockerfile_heroku()` now recommend to switch to their `_with_renv_` counterpart
+
+# golem 0.3.2
+
+### Soft deprecated
+
+- `use_recommended_deps()` is now soft deprecated (#786)
+
+### Hard deprecated
+
+- The `html` parameter in `expect_html_equal()` is no longer in use (#55).
+
+## New functions
+
+- `add_sass_file()` creates a .sass file in inst/app/www (#768)
+
+- `use_module_test()` creates a test skeleton for a module (#725)
+
+## New features
+
+- The `02_dev.R` file now suggests using `attachment::att_amend_desc()` (#787)
+
+- `use_code_of_conduct()` in dev script now has the contact param (#812)
+
+- All `with_test` params are now TRUE in the dev script (#801)
+
+- `test-golem-recommended` now has two new tests for `app_sys` and `get_golem_config` (#751)
+
+- `use_utils_ui()` `use_utils_server()` & now come with a `with_test` parameter that adds a test file for theses functions (#625 & #801)
+
+- `{golem}` now checks if a module exists before adding a module related file (#779)
+
+- Every `{rstudioapi}` calls is now conditionned by the availabily of this function (#776)
+
+- `use_external_*` functions no longer suggest to "Go to" (#713, @novica)
+
+- `create_golem()` now comes with `with_git` parameter that can be used to initialize git repository while creating a project template
+
+- `use_recommended_tests()` now comes with `testServer` (#720).
+
+- `expect_html_equal()` now uses `testthat::expect_snapshot()` (#55).
+
+- `add_modules()`, `add_fct()` and `add_utils()` now come with a `with_test` parameter that can be turned on to add a test file to the module (#719 & #141)
+
+- /!\ All docker related functions have been moved to `{dockerfiler}`. This is more or less a breaking change, cause you'll need to install `{dockerfiler}` > 0.1.4 in order to build the Dockerfile **but** `{golem}` will ask you to install `{dockerfiler}` > 0.1.4 if it can't find it, (#412)
+
+- Modules ID no longer contain an `_ui_` element, (#651, @MargotBr)
+
+- run_dev now has `options(shiny.port = httpuv::randomPort())` to prevent the browser from caching the CSS & JS files (#675)
+
+- You can now specify the path to R in `expect_running()`.
+
+## Bug fix
+
+- Fixed a bug in the printing of the htmlTemplate code (#827)
+
+- We now require the correct `{usethis}` version (822)
+
+- `golem::amend_config()` now keeps the `!expr` (#709, @teofiln)
+
+- recommended tests now use `expect_type()` instead of `expect_is`, which was deprecated from `{testthat}` (#671)
+
+- Fixed check warning when using `golem::use_utils_server()` (#678),
+
+- Fixed issue with expect_running & path to R (#700, @waiteb5)
+
+- `expect_running()` now find R.exe on windows.
+
+- `use_recommended_tests()` no longer add `{processx}` to the `DESCRIPTION` (#710)
+
+- `bundle_resource()` does not include empty stylesheet anymore (#689, @erikvona)
