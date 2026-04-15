@@ -6,4 +6,5 @@ settings:
   agents:
     path: .agents/skills
     main_file_name: AGENTS.md
-skills_available: []
+skills_available:
+  - golem-upgrade
