@@ -1,0 +1,18 @@
+{
+  "name": "golem-skills",
+  "owner": {
+    "name": "Ilya Zarubin"
+  },
+  "metadata": {
+    "description": "Golem-focused Claude Code plugins.",
+    "version": "0.2.0"
+  },
+  "plugins": [
+    {
+      "name": "golem-claude-skills",
+      "version": "0.2.0",
+      "description": "Claude Code plugin with golem project skills.",
+      "source": "./plugins/golem-claude-skills"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "name": "golem-skills",
+  "interface": {
+    "displayName": "golem Skills"
+  },
+  "plugins": [
+    {
+      "name": "golem-codex-skills",
+      "source": {
+        "source": "local",
+        "path": "./plugins/golem-codex-skills"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Developer Tools"
+    }
+  ]
+}
