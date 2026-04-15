@@ -7,10 +7,6 @@ description: Build and evolve golem Shiny applications. Use when creating a gole
 
 Build professional Shiny applications with Claude Code using the golem framework.
 
-## What This Plugin Provides
-
-A set of skills and guidelines for creating production-ready Shiny applications following R package best practices and golem conventions.
-
 ## Routing
 
 Use this skill as the top-level router for golem application work.
@@ -24,63 +20,166 @@ Use this skill as the top-level router for golem application work.
 
 Use the most relevant reference first, then return here for the broader app-building workflow and conventions.
 
-### Skills
+## Overview
 
-- **Create Golem App** - Initialize a new golem Shiny application
-- **Add Module** - Create reusable Shiny modules with UI and server logic
-- **Add Function** - Add business logic functions or utilities
-- **Check App** - Validate package structure and dependencies
-- **Run Tests** - Execute your test suite
-- **Check for Missing ns()** - Validate module namespace wrapping
+This repository provides:
+- A Claude Code plugin with 6 skills for golem development
+- Best practice guidelines for Shiny app development
+- Example applications built with golem and Claude
+- Complete documentation for development workflows
 
-All documentation and guidelines are in the main project README.
+## First Steps
 
-## Quick Start
-
-1. Use the `/plugin` command in Claude Code to install this plugin
-2. Create a new app:
+1. Ask Claude to create a new golem app:
    ```
-   I want to create a golem Shiny application
+   Create a golem Shiny application for [your use case]
    ```
-3. Add modules and functions as needed
-4. Run `Rscript -e "golem::run_dev()"` to preview your app
 
-## Key Features
+2. Claude should create the app structure following the referenced guidelines.
 
-- ✅ Enforces R package best practices
-- ✅ Golem naming conventions and patterns
-- ✅ Reactive programming guidelines
-- ✅ Module and function templates
-- ✅ Test-driven development support
-- ✅ Complete documentation and examples
+3. Launch and develop:
+   ```r
+   Rscript -e "golem::run_dev()"
+   ```
 
-## Development Workflow
+## Available Workflows
+
+This skill routes golem application work across the following workflow areas:
+
+### 1. Create Golem App
+Initialize a new golem Shiny application with proper structure.
+
+### 2. Add Module
+Create reusable Shiny modules with UI and server logic.
+
+### 3. Add Function
+Add business logic functions or utilities.
+
+### 4. Check App
+Validate your package structure, documentation, and dependencies.
+
+### 5. Run Tests
+Execute your test suite.
+
+### 6. Check for Missing ns()
+Validate that all module input/output IDs are properly namespaced.
+
+## Complete Workflow Example
+
+Here's a typical development workflow:
+
+### Step 1: Create the app
+```
+Create a golem Shiny app for managing project timesheets.
+It should have:
+- A module to add time entries
+- A module to view timesheet summary
+- Categorize entries by project
+- Persist data in SQLite
+```
+
+### Step 2: Add modules
+```
+Add a module called "timesheet_form" with:
+- Date picker
+- Duration input (hours)
+- Project dropdown
+- Category selection
+- Notes textarea
+- Submit and clear buttons
+```
 
 ```
-Create App → Add Modules → Add Functions → Test → Check → Deploy
+Add a module called "timesheet_summary" that displays:
+- Total hours by project
+- Total hours by category
+- Weekly overview chart
+- Export to CSV button
 ```
 
-## Requirements
+### Step 3: Add functions
+```
+Add a factory function to handle database operations:
+- Save new timesheet entry
+- Fetch timesheet entries (with filtering)
+- Update entry
+- Delete entry
+- Calculate totals by project and category
+```
 
-- R 4.0+
-- golem package
-- devtools package
-- Shiny package
+### Step 4: Test
+```
+Run the tests for my app
+```
 
-## Example Applications
+### Step 5: Validate
+```
+Check my golem app for any issues
+```
 
-This plugin is designed to generate apps like:
+### Step 6: Launch
+```r
+Rscript -e "golem::run_dev()"
+```
 
-- **comparegpx** - GPS file comparison and visualization
-- **videotager** - Video tagging and search system
-- And more!
+## Key Commands
 
-See `/generated` for complete working examples.
+Once you have a golem app:
 
-## More Information
+```r
+# Launch the app
+Rscript -e "golem::run_dev()"
 
-See the main README in the parent directory for complete documentation.
+# Run tests
+Rscript -e "devtools::test()"
 
----
+# Check package
+Rscript -e "devtools::check()"
 
-Built by [ThinkR](https://thinkr.fr) for professional Shiny development with Claude Code.
+# Regenerate documentation
+Rscript -e "devtools::document()"
+
+# Format code
+air format .
+```
+
+## Project Structure
+
+After creating a golem app, you'll have:
+
+```text
+myapp/
+├── R/                      # Package code (flat structure)
+├── tests/testthat/         # Tests and fixtures
+├── inst/app/www/           # Static assets (CSS, JS, images)
+├── dev/                    # Development scripts
+├── data-raw/               # Data creation scripts
+├── DESCRIPTION             # Package metadata
+├── NAMESPACE               # Generated by devtools::document()
+├── golem-config.yml        # Configuration
+└── .Rbuildignore           # Files to exclude from package
+```
+
+## File Naming Conventions
+
+| Type | Pattern | Example |
+|------|---------|---------|
+| Modules | `R/mod_<name>.R` | `R/mod_gpx_reader.R` |
+| Module functions | `R/mod_<name>_fct_<fn>.R` | `R/mod_gpx_reader_fct_parse.R` |
+| Module utilities | `R/mod_<name>_utils_<fn>.R` | `R/mod_gpx_reader_utils_validate.R` |
+| Factory functions | `R/fct_<name>.R` | `R/fct_similarity_calc.R` |
+| Utilities | `R/utils_<name>.R` | `R/utils_formats.R` |
+| Tests | Mirror R/ | `tests/testthat/test-mod_gpx_reader.R` |
+
+## Communication Tips
+
+### Be Specific
+❌ "Add a module"
+✅ "Add a module for uploading CSV files that validates the structure and previews the data"
+
+### Provide Context
+❌ "Add a function"
+✅ "Add a factory function to calculate project budgets. It should sum expenses by category and compare against allocated budget"
+
+### Ask for Examples
+✅ "Add a factory function with @examples showing how to use it"
