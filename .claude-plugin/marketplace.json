@@ -1,5 +1,5 @@
 {
-  "name": "golem-skills",
+  "name": "thinkr",
   "owner": {
     "name": "Ilya Zarubin"
   },
@@ -9,7 +9,7 @@
   },
   "plugins": [
     {
-      "name": "golem-claude-skills",
+      "name": "golem-skills",
       "version": "0.2.0",
       "description": "Claude Code plugin with golem project skills.",
       "source": "./plugins/golem-claude-skills"

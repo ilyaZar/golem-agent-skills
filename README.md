@@ -24,7 +24,7 @@ Confirm the marketplace is available:
 Install the plugin:
 
 ```text
-/plugin install golem-claude-skills@golem-skills
+/plugin install golem-skills@thinkr
 ```
 
 Reload plugins if prompted:
@@ -36,15 +36,15 @@ Reload plugins if prompted:
 After installation, the following plugin skills should be available:
 
 ```text
-/golem-claude-skills:golem-upgrade
-/golem-claude-skills:golem-fix-missing-ns
+/golem-skills:golem-upgrade
+/golem-skills:golem-fix-missing-ns
 ```
 
 ## Remove the plugin
 
 ```text
-/plugin uninstall golem-claude-skills
-/plugin marketplace remove golem-skills
+/plugin uninstall golem-skills
+/plugin marketplace remove thinkr
 /reload-plugins
 ```
 

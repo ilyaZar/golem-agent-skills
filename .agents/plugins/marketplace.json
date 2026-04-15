@@ -1,11 +1,11 @@
 {
-  "name": "golem-skills",
+  "name": "thinkr",
   "interface": {
     "displayName": "golem Skills"
   },
   "plugins": [
     {
-      "name": "golem-codex-skills",
+      "name": "golem-skills",
       "source": {
         "source": "local",
         "path": "./plugins/golem-codex-skills"
