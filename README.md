@@ -40,6 +40,38 @@ following R package best practices and golem conventions.
 Create App -> Add Modules -> Add Functions -> Test -> Check -> Deploy
 ```
 
+## Key Commands
+
+Once you have a golem app:
+
+```r
+# Launch the app
+Rscript -e "golem::run_dev()"
+
+# Run tests
+Rscript -e "devtools::test()"
+
+# Check package
+Rscript -e "devtools::check()"
+
+# Regenerate documentation
+Rscript -e "devtools::document()"
+
+# Format code
+air format .
+```
+
+## File Naming Conventions
+
+| Type | Pattern | Example |
+|------|---------|---------|
+| Modules | `R/mod_<name>.R` | `R/mod_gpx_reader.R` |
+| Module functions | `R/mod_<name>_fct_<fn>.R` | `R/mod_gpx_reader_fct_parse.R` |
+| Module utilities | `R/mod_<name>_utils_<fn>.R` | `R/mod_gpx_reader_utils_validate.R` |
+| Factory functions | `R/fct_<name>.R` | `R/fct_similarity_calc.R` |
+| Utilities | `R/utils_<name>.R` | `R/utils_formats.R` |
+| Tests | Mirror R/ | `tests/testthat/test-mod_gpx_reader.R` |
+
 ## Requirements
 
 - R 4.0+
