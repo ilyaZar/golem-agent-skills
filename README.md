@@ -1,6 +1,6 @@
 # golem-agent-skills
 
-Shared `{golem}` skills packaged for Claude Code and openAI codex/GPT 5.4.
+Shared `{golem}` skills packaged for Claude Code and OpenAI agents.
 
 Canonical skill content lives in [`skills/`](./skills).
 
@@ -9,14 +9,15 @@ Made by [ThinkR](https://thinkr.fr/) for professional Shiny development.
 ## Overview
 
 This repository provides:
-- Claude Code and Codex plugin packaging around shared golem skills
+- Claude Code and AGENTS plugin packaging around shared golem skills
 - Best practice guidelines for Shiny app development
 - A routed golem app builder skill for end-to-end app work
 - Complete documentation for installation and development workflows
 
 ## What This Plugin Provides
 
-A set of skills and guidelines for creating production-ready Shiny applications following R package best practices and golem conventions.
+A set of skills and guidelines for creating production-ready Shiny applications
+following R package best practices and golem conventions.
 
 ### Skills
 
@@ -42,9 +43,9 @@ Create App -> Add Modules -> Add Functions -> Test -> Check -> Deploy
 ## Requirements
 
 - R 4.0+
-- golem package
-- devtools package
-- Shiny package
+- `{golem}` package
+- `{devtools}` package
+- `{shiny}` package
 
 ## Claude Code installation
 
@@ -91,7 +92,7 @@ canonical upstream `skills/` tree and copies into provider-specific target
 directories in the consuming Shiny App project:
 
 - Claude target: `.claude/skills/`
-- Codex target: `.agents/skills/`
+- AGENTS target: `.agents/skills/`
 
 This keeps the upstream repository canonical while preserving the expected
 project layout for each tool.

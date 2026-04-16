@@ -4,7 +4,7 @@ targets:
   claude:
     path: .claude/skills
     main_file_name: CLAUDE.md
-  codex:
+  agents:
     path: .agents/skills
     main_file_name: AGENTS.md
 skills_available:
