@@ -117,6 +117,7 @@ air format .
     /golem-skills:golem-fix-missing-ns
     /golem-skills:golem-fix-missing-ns-colin
     ```
+    In current Claude Code versions, `/golem-upgrade` may also work directly, but the namespaced form above is the documented syntax.
 
 ## Remove the plugin
 
