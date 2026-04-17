@@ -5,12 +5,12 @@
   },
   "metadata": {
     "description": "Golem-focused Claude Code plugins.",
-    "version": "0.2.0"
+    "version": "0.1.0"
   },
   "plugins": [
     {
       "name": "golem-skills",
-      "version": "0.2.0",
+      "version": "0.1.0",
       "description": "Claude Code plugin with golem project skills.",
       "source": "./plugins/golem-claude-skills"
     }

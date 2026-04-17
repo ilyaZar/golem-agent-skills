@@ -11,7 +11,7 @@ Made by [ThinkR](https://thinkr.fr/) for professional Shiny development.
 This repository provides:
 - Claude Code and AGENTS plugin packaging around shared golem skills
 - Best practice guidelines for Shiny app development
-- A routed golem app builder skill for end-to-end app work
+- Task-focused golem skills for common app workflows
 - Complete documentation for installation and development workflows
 
 ## What This Plugin Provides
@@ -21,9 +21,14 @@ following R package best practices and golem conventions.
 
 ### Skills
 
-- **Golem App Builder** - Build and evolve golem applications using routed references
+- **Golem Create Golem** - Create a new golem application
+- **Golem Add Module** - Add a new module to an existing golem app
+- **Golem Add Function** - Add business logic and utility functions
+- **Golem Check App** - Run package checks and address common issues
+- **Golem Run Tests** - Run and structure golem app tests
 - **Golem Upgrade** - Upgrade golem apps across package and structure changes
 - **Golem Fix Missing ns** - Check modules for missing `ns()`
+- **Golem Fix Missing ns Colin** - Alternate guidance for checking module namespacing
 
 ## Key Features
 
@@ -103,15 +108,20 @@ air format .
 
 5. After installation, the following plugin skills should be available:
     ```text
-    /golem-skills:golem-app-builder
+    /golem-skills:golem-create-golem
+    /golem-skills:golem-add-module
+    /golem-skills:golem-add-function
+    /golem-skills:golem-check-app
+    /golem-skills:golem-run-tests
     /golem-skills:golem-upgrade
     /golem-skills:golem-fix-missing-ns
+    /golem-skills:golem-fix-missing-ns-colin
     ```
 
 ## Remove the plugin
 
 ```text
-/plugin uninstall golem-skills
+/plugin uninstall golem-skills@thinkr
 /plugin marketplace remove thinkr
 /reload-plugins
 ```

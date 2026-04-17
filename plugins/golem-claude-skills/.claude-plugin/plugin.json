@@ -1,6 +1,6 @@
 {
   "name": "golem-skills",
-  "version": "0.2.0",
+  "version": "0.1.0",
   "description": "Claude Code plugin with golem project skills.",
   "author": {
     "name": "Ilya Zarubin",
