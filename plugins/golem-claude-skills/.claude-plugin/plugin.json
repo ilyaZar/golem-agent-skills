@@ -3,11 +3,11 @@
   "version": "0.1.0",
   "description": "Claude Code plugin with golem project skills.",
   "author": {
-    "name": "Ilya Zarubin",
-    "url": "https://github.com/ilyaZar"
+    "name": "ThinkR",
+    "url": "https://thinkr.fr/"
   },
-  "homepage": "https://github.com/ilyaZar/golem-agent-skills",
-  "repository": "https://github.com/ilyaZar/golem-agent-skills",
+  "homepage": "https://github.com/ThinkR-open/golem-agent-skills",
+  "repository": "https://github.com/ThinkR-open/golem-agent-skills",
   "license": "MIT",
   "skills": "./skills"
 }
